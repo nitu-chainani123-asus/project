@@ -1,6 +1,14 @@
 const express = require("express");
+const mysql = require("mysql2");
 
 const app = express();
+
+const connection = mysql.createConnection({
+    host: "localhost",
+    user: "root",
+    password: "Nata20@MYSQL",
+    database: "internship_db"
+});
 
 app.use(express.json());
 
@@ -9,12 +17,16 @@ app.get("/", (req, res) => {
 });
 
 app.get("/students", (req, res) => {
-    const students = [
-        { name: "Aarav", marks: 85 },
-        { name: "Sneha", marks: 91 }
-    ];
+    connection.query("SELECT * FROM students", (error, results) => {
+        if (error) {
+            console.error("Query failed:", error);
+            return res.status(500).json({
+                message: "Database query failed"
+            });
+        }
 
-    res.json(students);
+        res.json(results);
+    });
 });
 
 app.post("/students", (req, res) => {
