@@ -69,7 +69,23 @@ app.post("/students", (req, res) => {
 app.put("/students/:id", (req, res) => {
     const { id } = req.params;
     const { name, marks } = req.body;
+ if (!name) {
+    return res.status(400).json({
+        message: "Name is required"
+    });
+}
 
+if (marks === undefined) {
+    return res.status(400).json({
+        message: "Marks are required"
+    });
+}
+
+if (typeof marks !== "number" || marks < 0 || marks > 100) {
+    return res.status(400).json({
+        message: "Marks must be between 0 and 100"
+    });
+}
     const sql = "UPDATE students SET name = ?, marks = ? WHERE id = ?";
 
     connection.query(sql, [name, marks, id], (error, result) => {
