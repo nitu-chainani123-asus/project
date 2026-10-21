@@ -1,0 +1,84 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Complaint Management System</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <h1>Complaint Management System</h1>
+        <p>Submit complaints and track their progress easily.</p>
+    </header>
+
+    <main>
+        <section>
+            <h2>Submit a Complaint</h2>
+
+            <form id="complaintForm">
+                <label for="userId">User ID</label>
+                <input type="number" id="userId" value="1" required>
+
+                <label for="title">Complaint Title</label>
+                <input type="text" id="title" placeholder="Enter complaint title" required>
+
+                <label for="category">Category</label>
+                <select id="category" required>
+                    <option value="">Select a category</option>
+                    <option value="Maintenance">Maintenance</option>
+                    <option value="Water Supply">Water Supply</option>
+                    <option value="Electricity">Electricity</option>
+                    <option value="Cleanliness">Cleanliness</option>
+                    <option value="Other">Other</option>
+                </select>
+
+                <label for="description">Description</label>
+                <textarea id="description" placeholder="Describe your complaint" required></textarea>
+
+                <button type="submit">Submit Complaint</button>
+            </form>
+
+            <p id="message"></p>
+        </section>
+
+        <section>
+            <h2>All Complaints</h2>
+            <button type="button" id="loadComplaints">Refresh Complaints</button>
+            <div id="complaintsList">Click refresh to load complaints.</div>
+        </section>
+        
+        <section id="adminSection">
+            <h2>Admin - Manage Complaints</h2>
+            <p>Update the status of a complaint using its ID.</p>
+
+            <form id="statusForm">
+                <label for="complaintId">Complaint ID</label>
+                <input
+                    type="number"
+                    id="complaintId"
+                    placeholder="Enter complaint ID"
+                    min="1"
+                    required
+                >
+
+                <label for="complaintStatus">New Status</label>
+                <select id="complaintStatus" required>
+                    <option value="Pending">Pending</option>
+                    <option value="In Progress">In Progress</option>
+                    <option value="Resolved">Resolved</option>
+                </select>
+
+                <button type="submit">Update Status</button>
+            </form>
+
+            <p id="adminMessage"></p>
+        </section>
+
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
