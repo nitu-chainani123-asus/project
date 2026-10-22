@@ -3,7 +3,7 @@ const express = require("express");
 const mysql = require("mysql2");
 const cors = require("cors");
 require("dotenv").config();
-
+const { validateComplaint } = require("./validation");
 const app = express();
 
 app.use(cors());
@@ -75,15 +75,26 @@ app.get("/complaints/:id", (req, res) => {
     );
 });
 
-// Submit a complaint
+ // Submit a complaint
 app.post("/complaints", (req, res) => {
     const { user_id, title, description, category } = req.body;
 
-    if (!user_id || !title?.trim() || !description?.trim() || !category) {
+    const validationError = validateComplaint({
+        user_id,
+        title,
+        description,
+        category
+    });
+
+    if (validationError) {
         return res.status(400).json({
-            message: "User ID, title, description, and category are required"
+            message: validationError
         });
     }
+
+    
+
+    
 
     const sql = `
         INSERT INTO complaints (user_id, title, description, category)
