@@ -4,7 +4,7 @@ const message = document.getElementById("message");
 const complaintsList = document.getElementById("complaintsList");
 const loadButton = document.getElementById("loadComplaints");
 
-const API_URL = "http://localhost:3000";
+const API_URL = "https://project-zpjs.onrender.com";
 
 // Submit a complaint
 complaintForm.addEventListener("submit", async (event) => {
